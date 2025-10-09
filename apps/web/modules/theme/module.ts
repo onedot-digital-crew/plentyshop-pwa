@@ -28,7 +28,26 @@ export default defineNuxtModule({
 
       // Override the primary-500 color
       if (config?.theme?.extend?.colors) {
-        (config.theme.extend.colors as TailwindColors)['primary']['500'] = '#000';
+        // Ensure gray object exists
+        if (!(config.theme.extend.colors as TailwindColors)['gray']) {
+          (config.theme.extend.colors as TailwindColors)['gray'] = {};
+        }
+        
+        (config.theme.extend.colors as TailwindColors)['primary']['500'] = '#FF6200';
+        (config.theme.extend.colors as TailwindColors)['primary']['600'] = '#D14F01';
+        (config.theme.extend.colors as TailwindColors)['gray']['100'] = '#F7F7F7';
+        (config.theme.extend.colors as TailwindColors)['gray']['200'] = '#D6D6D6';
+        (config.theme.extend.colors as TailwindColors)['gray']['300'] = '#ACACAC';
+        (config.theme.extend.colors as TailwindColors)['gray']['600'] = '#6A6A6A';
+        (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
+      }
+
+      // Set custom transition duration to 400ms
+      if (config?.theme?.extend) {
+        if (!config.theme.extend.transitionDuration) {
+          config.theme.extend.transitionDuration = {};
+        }
+        (config.theme.extend.transitionDuration as Record<string, string>)['DEFAULT'] = '400ms';
       }
     });
 
@@ -62,6 +81,10 @@ export default defineNuxtModule({
       const uiButton = components.find((c) => c.pascalName === 'UiButton');
       if (uiButton) {
         uiButton.filePath = resolve('./runtime/components/UiButton.vue');
+      }
+      const uiProductCard = components.find((c) => c.pascalName === 'UiProductCard');
+      if (uiProductCard) {
+        uiProductCard.filePath = resolve('./runtime/components/UiProductCard.vue');
       }
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {

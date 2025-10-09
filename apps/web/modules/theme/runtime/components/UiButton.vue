@@ -71,7 +71,7 @@ const type = computed(
 
 const variantClasses = {
   [SfButtonVariant.primary]:
-    'text-white shadow hover:shadow-md active:shadow bg-red-500 hover:bg-red-600 active:bg-red-700 disabled:bg-disabled-300',
+    'text-white shadow hover:shadow-md active:shadow bg-primary-500 hover:bg-primary-600 active:bg-primary-600 disabled:bg-disabled-300',
   [SfButtonVariant.secondary]:
     'text-red-500 hover:bg-red-100 hover:text-red-800 active:bg-red-200 active:text-red-900 ring-1 ring-inset ring-red-500 shadow hover:shadow-md active:shadow hover:ring-red-800 active:ring-red-900 disabled:ring-1 disabled:ring-disabled-300 disabled:bg-white/50',
   [SfButtonVariant.tertiary]:

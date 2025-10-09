@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group flex flex-col border-white border hover:border-gray-200 transition"
+    class="group flex flex-col border-white border hover:border-gray-200 transition w-full"
     data-testid="product-card"
   >
     <div class="relative overflow-hidden">
@@ -15,7 +15,7 @@
         :tag="NuxtLink"
         rel="preload"
         :to="productPath"
-        :class="[{ 'size-48': isFromSlider }, 'relative group/image flex items-center justify-center']"
+        class="bg-gray-100 aspect-square md:aspect-[3/2] relative group/image flex items-center justify-center"
         as="image"
       >
         <NuxtImg
@@ -28,7 +28,7 @@
           :width="getWidth()"
           :height="getHeight()"
           :class="[
-            'object-contain rounded-md aspect-square w-full transition-opacity duration-300',
+            'object-contain mix-blend-multiply w-full h-full transition-opacity duration-300',
             effectiveHoverImageUrl ? 'group-hover/image:opacity-0' : '',
           ]"
           data-testid="image-slot"
@@ -43,7 +43,7 @@
           :preload="false"
           :width="getWidth()"
           :height="getHeight()"
-          class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/image:opacity-100 object-contain rounded-md w-full h-full"
+          class="absolute inset-0 opacity-0 mix-blend-multiply transition-opacity duration-300 group-hover/image:opacity-100 object-contain w-full h-full"
           data-testid="hover-image-slot"
         />
       </SfLink>
@@ -60,7 +60,7 @@
     </div>
 
     <div
-      class="p-2 border-t border-neutral-200 typography-text-sm flex flex-col flex-auto"
+      class="p-2 border-neutral-200 text-2xs uppercase flex flex-col flex-auto"
       :class="{
         'items-center': configuration?.contentAlignment === 'center',
         'items-end': configuration?.contentAlignment === 'right',

@@ -2,6 +2,7 @@ import {
   useLogger,
   defineNuxtModule,
   createResolver,
+  addPlugin,
 } from '@nuxt/kit';
 import type { TailwindColors } from './types';
 import type { Config as TailwindConfig } from 'tailwindcss/types/config';
@@ -15,6 +16,9 @@ export default defineNuxtModule({
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
     const logger = useLogger('pwa-module-boilerplate');
+
+    // Add custom CSS file
+    nuxt.options.css.push(resolve('./runtime/assets/styles.css'));
 
     /**
      * Hook to modify the TailwindCSS configuration
@@ -32,14 +36,32 @@ export default defineNuxtModule({
         if (!(config.theme.extend.colors as TailwindColors)['gray']) {
           (config.theme.extend.colors as TailwindColors)['gray'] = {};
         }
-        
-        (config.theme.extend.colors as TailwindColors)['primary']['500'] = '#FF6200';
-        (config.theme.extend.colors as TailwindColors)['primary']['600'] = '#D14F01';
         (config.theme.extend.colors as TailwindColors)['gray']['100'] = '#F7F7F7';
         (config.theme.extend.colors as TailwindColors)['gray']['200'] = '#D6D6D6';
         (config.theme.extend.colors as TailwindColors)['gray']['300'] = '#ACACAC';
         (config.theme.extend.colors as TailwindColors)['gray']['600'] = '#6A6A6A';
         (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
+      }
+
+      // Set custom font sizes
+      if (config?.theme?.extend) {
+        if (!config.theme.extend.fontSize) {
+          config.theme.extend.fontSize = {};
+        }
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['72'] = ['72px', '1.111em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['56'] = ['56px', '1.143em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['48'] = ['48px', '1.167em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['44'] = ['44px', '1.227em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['36'] = ['36px', '1.222em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['34'] = ['34px', '1.294em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['28'] = ['28px', '1.214em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['26'] = ['26px', '1.385em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['24'] = ['24px', '1.5em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['22'] = ['22px', '1.182em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['18'] = ['18px', '1.333em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['16'] = ['16px', '1.5em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['14'] = ['14px', '1.429em'];
+        (config.theme.extend.fontSize as Record<string, [string, string]>)['12'] = ['12px', '1.667em'];
       }
 
       // Set custom transition duration to 400ms

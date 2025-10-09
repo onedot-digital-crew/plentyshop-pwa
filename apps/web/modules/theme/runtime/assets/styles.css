@@ -1,0 +1,28 @@
+/* Custom Typography Helper Classes */
+.text-xl, .text-h1 {
+    @apply text-44 lg:text-72 font-bold;
+}
+.text-l, .text-h2 {
+    @apply text-34 lg:text-56 font-bold;
+}
+.text-m, .text-h3 {
+    @apply text-28 lg:text-48 font-bold;
+}
+.text-s, .text-h4 {
+    @apply text-22 lg:text-24 font-bold;
+}
+.text-xs, .text-h5 {
+    @apply text-16 lg:text-18 font-semibold;
+}
+.text-2xs, .text-h6, .text-xxs {
+    @apply text-16 font-semibold;
+}
+.text-base, .text-regular {
+    @apply text-16 
+}
+.text-small {
+    @apply text-14;
+}
+.text-micro {
+    @apply text-14 lg:text-12
+}

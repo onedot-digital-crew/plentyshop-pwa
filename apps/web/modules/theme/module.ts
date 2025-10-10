@@ -43,6 +43,7 @@ export default defineNuxtModule({
         (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
       }
 
+
       // Set custom font sizes
       if (config?.theme?.extend) {
         if (!config.theme.extend.fontSize) {
@@ -70,6 +71,14 @@ export default defineNuxtModule({
           config.theme.extend.transitionDuration = {};
         }
         (config.theme.extend.transitionDuration as Record<string, string>)['DEFAULT'] = '400ms';
+      }
+
+      // Set custom width for w-88
+      if (config?.theme?.extend) {
+        if (!config.theme.extend.width) {
+          config.theme.extend.width = {};
+        }
+        (config.theme.extend.width as Record<string, string>)['88'] = '22rem';
       }
     });
 
@@ -111,6 +120,10 @@ export default defineNuxtModule({
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {
         textContent.filePath = resolve('./runtime/components/TextContent.vue');
+      }
+      const productSlider = components.find((c) => c.pascalName === 'ProductSlider');
+      if (productSlider) {
+        productSlider.filePath = resolve('./runtime/components/ProductSlider.vue');
       }
     });
   },

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group flex flex-col border-white border hover:border-gray-200 transition w-full"
+    class="group flex flex-col border-white border hover:border-gray-200 transition p-2"
     data-testid="product-card"
   >
     <div class="relative overflow-hidden">
@@ -60,7 +60,7 @@
     </div>
 
     <div
-      class="p-2 border-neutral-200 text-2xs uppercase flex flex-col flex-auto"
+      class="pt-3 lg:pt-4 flex flex-col flex-auto"
       :class="{
         'items-center': configuration?.contentAlignment === 'center',
         'items-end': configuration?.contentAlignment === 'right',
@@ -72,7 +72,7 @@
           <SfLink
             :tag="NuxtLink"
             :to="productPath"
-            class="no-underline"
+            class="no-underline text-2xs uppercase"
             variant="secondary"
             data-testid="productcard-name"
           >
@@ -81,9 +81,9 @@
         </template>
 
         <template v-if="key === 'rating' && configuration?.fields?.rating">
-          <div class="flex items-center pt-1 gap-1" :class="{ 'mb-2': !shortDescription }">
-            <SfRating size="xs" :half-increment="true" :value="rating ?? 0" :max="5" />
-            <SfCounter size="xs">{{ ratingCount }}</SfCounter>
+          <div class="flex items-center gap-1" :class="{ 'mb-2': !shortDescription }">
+            <SfRating size="sm" :half-increment="true" :value="4" :max="5" class="!text-black" />
+            <SfCounter class="text-small !font-normal max-md:hidden" size="xs">{{ ratingCount }}</SfCounter>
           </div>
         </template>
 
@@ -103,7 +103,7 @@
           </div>
 
           <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-            <span class="block pb-2 font-bold typography-text-sm" data-testid="product-card-vertical-price">
+            <span class="block pb-2 font-bold text-base" data-testid="product-card-vertical-price">
               <span v-if="!canAddFromCategory" class="mr-1">{{
                 t('account.ordersAndReturns.orderDetails.priceFrom')
               }}</span>
@@ -119,7 +119,7 @@
           </div>
         </template>
 
-        <template v-if="key === 'addToCart' && configuration?.fields?.addToCart">
+        <!-- <template v-if="key === 'addToCart' && configuration?.fields?.addToCart">
           <UiButton
             v-if="canAddFromCategory"
             size="sm"
@@ -147,7 +147,7 @@
           >
             <span>{{ t('showOptions') }}</span>
           </UiButton>
-        </template>
+        </template> -->
       </template>
     </div>
   </div>

@@ -111,11 +111,15 @@ export default defineNuxtModule({
     nuxt.hook('components:extend', (components) => {
       const uiButton = components.find((c) => c.pascalName === 'UiButton');
       if (uiButton) {
-        uiButton.filePath = resolve('./runtime/components/UiButton.vue');
+        uiButton.filePath = resolve('./runtime/components/ui/Button.vue');
       }
       const uiProductCard = components.find((c) => c.pascalName === 'UiProductCard');
       if (uiProductCard) {
-        uiProductCard.filePath = resolve('./runtime/components/UiProductCard.vue');
+        uiProductCard.filePath = resolve('./runtime/components/ui/ProductCard.vue');
+      }
+      const blocksBannerCarouselBanner = components.find((c) => c.pascalName === 'BlocksBannerCarouselBanner');
+      if (blocksBannerCarouselBanner) {
+        blocksBannerCarouselBanner.filePath = resolve('./runtime/components/blocks/BannerCarousel/Banner.vue');
       }
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {

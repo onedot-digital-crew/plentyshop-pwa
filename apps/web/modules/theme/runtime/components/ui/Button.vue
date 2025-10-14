@@ -4,7 +4,7 @@
     :type="type"
     :disabled="disabled"
     :class="[
-      'inline-flex items-center justify-center font-medium text-base focus-visible:outline focus-visible:outline-offset rounded-md disabled:text-disabled-500 disabled:bg-disabled-300 disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
+      'inline-flex items-center justify-center transition text-xs py-5 px-6 focus-visible:outline focus-visible:outline-offset disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
       sizeClasses,
       variantClasses[variant],
     ]"
@@ -73,7 +73,7 @@ const variantClasses = {
   [SfButtonVariant.primary]:
     'text-white shadow hover:shadow-md active:shadow bg-primary-500 hover:bg-primary-600 active:bg-primary-600 disabled:bg-disabled-300',
   [SfButtonVariant.secondary]:
-    'text-red-500 hover:bg-red-100 hover:text-red-800 active:bg-red-200 active:text-red-900 ring-1 ring-inset ring-red-500 shadow hover:shadow-md active:shadow hover:ring-red-800 active:ring-red-900 disabled:ring-1 disabled:ring-disabled-300 disabled:bg-white/50',
+    'bg-white text-black p-4 hover:bg-gray-200',
   [SfButtonVariant.tertiary]:
     'text-red-500 hover:bg-red-100 hover:text-red-800 active:bg-red-200 active:text-red-900 disabled:bg-transparent',
 };

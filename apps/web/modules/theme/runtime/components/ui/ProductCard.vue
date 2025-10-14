@@ -103,7 +103,7 @@
           </div>
 
           <div class="flex flex-col-reverse items-start md:flex-row md:items-center mt-auto">
-            <span class="block pb-2 font-bold text-base" data-testid="product-card-vertical-price">
+            <span class="block pb-2 font-regular text-small" data-testid="product-card-vertical-price">
               <span v-if="!canAddFromCategory" class="mr-1">{{
                 t('account.ordersAndReturns.orderDetails.priceFrom')
               }}</span>
@@ -112,7 +112,7 @@
             </span>
             <span
               v-if="crossedPrice && differentPrices(price, crossedPrice)"
-              class="typography-text-sm text-neutral-500 line-through md:ml-3 md:pb-2"
+              class="typography-text-sm text-gray-600 line-through md:ml-3 md:pb-2"
             >
               {{ format(crossedPrice) }}
             </span>

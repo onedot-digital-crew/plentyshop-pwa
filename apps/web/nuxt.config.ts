@@ -192,6 +192,7 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    './modules/theme',
     '@plentymarkets/shop-core',
     '@plentymarkets/shop-module-mollie',
     '@plentymarkets/shop-module-gtag',

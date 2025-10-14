@@ -125,9 +125,33 @@ export default defineNuxtModule({
       if (blocksStructureMultiGrid) {
         blocksStructureMultiGrid.filePath = resolve('./runtime/components/blocks/structure/MultiGrid.vue');
       }
+      const blocksItemGrid = components.find((c) => c.pascalName === 'BlocksItemGrid');
+      if (blocksItemGrid) {
+        blocksItemGrid.filePath = resolve('./runtime/components/blocks/ItemGrid/ItemGrid.vue');
+      }
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {
         textContent.filePath = resolve('./runtime/components/TextContent.vue');
+      }
+      const categoryFiltersSort = components.find((c) => c.pascalName === 'CategoryFiltersSort');
+      if (categoryFiltersSort) {
+        categoryFiltersSort.filePath = resolve('./runtime/components/CategoryFilters/Sort.vue');
+      }
+      const categoryFiltersSortSections = components.find((c) => c.pascalName === 'CategoryFiltersSortSections');
+      if (categoryFiltersSortSections) {
+        categoryFiltersSortSections.filePath = resolve('./runtime/components/CategoryFilters/SortSections.vue');
+      }
+      const categoryFiltersCategoryFilter = components.find((c) => c.pascalName === 'CategoryFiltersCategoryFilter');
+      if (categoryFiltersCategoryFilter) {
+        categoryFiltersCategoryFilter.filePath = resolve('./runtime/components/CategoryFilters/CategoryFilter.vue');
+      }
+      const categoryFiltersFilter = components.find((c) => c.pascalName === 'CategoryFiltersFilter');
+      if (categoryFiltersFilter) {
+        categoryFiltersFilter.filePath = resolve('./runtime/components/CategoryFilters/Filter.vue');
+      }
+      const categorySidebar = components.find((c) => c.pascalName === 'CategorySidebar');
+      if (categorySidebar) {
+        categorySidebar.filePath = resolve('./runtime/components/CategorySidebar.vue');
       }
       const productSlider = components.find((c) => c.pascalName === 'ProductSlider');
       if (productSlider) {

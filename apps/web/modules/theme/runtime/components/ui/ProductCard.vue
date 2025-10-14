@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group flex flex-col border-white border hover:border-gray-200 transition p-2"
+    class="group flex flex-col border-white border hover:border-gray-200 transition p-1 overflow-hidden"
     data-testid="product-card"
   >
     <div class="relative overflow-hidden">
@@ -72,7 +72,7 @@
           <SfLink
             :tag="NuxtLink"
             :to="productPath"
-            class="no-underline text-2xs uppercase"
+            class="no-underline text-2xs uppercase line-clamp-2 text-ellipsis hyphens-auto"
             variant="secondary"
             data-testid="productcard-name"
           >

@@ -121,6 +121,10 @@ export default defineNuxtModule({
       if (blocksBannerCarouselBanner) {
         blocksBannerCarouselBanner.filePath = resolve('./runtime/components/blocks/BannerCarousel/Banner.vue');
       }
+      const blocksStructureMultiGrid = components.find((c) => c.pascalName === 'BlocksStructureMultiGrid');
+      if (blocksStructureMultiGrid) {
+        blocksStructureMultiGrid.filePath = resolve('./runtime/components/blocks/structure/MultiGrid.vue');
+      }
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {
         textContent.filePath = resolve('./runtime/components/TextContent.vue');

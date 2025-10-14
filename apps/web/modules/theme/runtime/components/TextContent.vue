@@ -1,5 +1,5 @@
 <template>
-  <div data-testid="text-content" :style="{ color: props.text?.color }" :class="['space-y-4', textAlignmentClass]">
+  <div data-testid="text-content" :style="{ color: props.text?.color }" :class="[textAlignmentClass]" class="max-w-3xl mx-auto">
     <div v-if="text?.pretitle" data-testid="text-pretitle" class="text-xl font-bold mb-2" v-html="text.pretitle" />
 
     <h1
@@ -12,7 +12,7 @@
     <h2
       v-if="text?.title && index !== 0"
       data-testid="text-title"
-      class="text-2xl font-semibold mb-4"
+      class="text-m uppercase mb-3 md:mb-4"
       v-html="text.title"
     />
 
@@ -24,7 +24,7 @@
       :to="localePath(button?.link ?? '')"
       :variant="button?.variant ?? 'primary'"
       data-testid="text-button"
-      class="mt-3 px-4 py-2"
+      class="mt-6 md:mt-10 px-4 py-2"
     >
       {{ button?.label }}
     </UiButton>

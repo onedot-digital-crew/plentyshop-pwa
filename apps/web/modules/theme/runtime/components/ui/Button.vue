@@ -4,7 +4,7 @@
     :type="type"
     :disabled="disabled"
     :class="[
-      'inline-flex items-center justify-center transition text-xs py-5 px-6 focus-visible:outline focus-visible:outline-offset disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
+      'inline-flex items-center justify-center transition text-xs py-3 px-6 lg:py-5 focus-visible:outline focus-visible:outline-offset disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
       sizeClasses,
       variantClasses[variant],
     ]"
@@ -71,9 +71,9 @@ const type = computed(
 
 const variantClasses = {
   [SfButtonVariant.primary]:
-    'text-white shadow hover:shadow-md active:shadow bg-primary-500 hover:bg-primary-600 active:bg-primary-600 disabled:bg-disabled-300',
+    'bg-black text-white hover:bg-gray-900',
   [SfButtonVariant.secondary]:
-    'bg-white text-black p-4 hover:bg-gray-200',
+    'bg-white text-black hover:bg-gray-200',
   [SfButtonVariant.tertiary]:
     'text-red-500 hover:bg-red-100 hover:text-red-800 active:bg-red-200 active:text-red-900 disabled:bg-transparent',
 };

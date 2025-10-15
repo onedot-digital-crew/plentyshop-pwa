@@ -1,9 +1,9 @@
 <template>
   <SfAccordionItem v-if="facet" v-model="open">
     <template #summary>
-      <div class="flex justify-between p-2 mb-2 select-none border border-gray-600">
-        <p class="mb-2 font-medium typography-headline-5">{{ facetGetters.getName(facet) }}</p>
-        <SfIconChevronLeft :class="['text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
+      <div class="flex justify-between p-3 select-none border border-gray-600 transition hover:text-primary-500" :class="open ? 'text-primary-500 font-semibold' : 'text-black'">
+        <p class="text-base">{{ facetGetters.getName(facet) }}</p>
+        <SfIconChevronLeft :class="['transition', open ? 'rotate-90' : '-rotate-90']" />
       </div>
     </template>
     <div v-if="facetGetters.getType(facet) === 'feedback'">

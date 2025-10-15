@@ -1,35 +1,41 @@
 <template>
   <div class="flex-1">
-    <template v-if="content?.showItemCount">
-      <div
-        class="flex items-center mb-6"
-        :class="{
-          'justify-end': content?.itemCountPosition === 'right',
-          'justify-center': content?.itemCountPosition === 'center',
-          'justify-start': content?.itemCountPosition === 'left',
-        }"
-      >
-        <span class="font-bold md:text-lg">
-          {{
-            t('numberOfProducts', {
-              count: products?.length ?? 0,
-              total: totalProducts,
-            })
-          }}
-        </span>
-      </div>
-    </template>
+    <div class="md:flex justify-between items-center gap-4 mb-4">
+      <template v-if="content?.showItemCount">
+        <div
+          class="flex items-center max-md:mb-6 shrink-0"
+          :class="{
+            'justify-end': content?.itemCountPosition === 'right',
+            'justify-center': content?.itemCountPosition === 'center',
+            'justify-start': content?.itemCountPosition === 'left',
+          }"
+        >
+          <span class="text-base">
+            {{
+              t('numberOfProducts', {
+                count: products?.length ?? 0,
+                total: totalProducts,
+              })
+            }}
+          </span>
+        </div>
+      </template>
 
-    <template v-if="content?.paginationPosition === 'top' || content?.paginationPosition === 'both'">
-      <UiPagination
-        v-if="totalProducts > 0"
-        :key="`${totalProducts}-${itemsPerPage}`"
-        :current-page="getFacetsFromURL().page ?? 1"
-        :total-items="totalProducts"
-        :page-size="itemsPerPage"
-        :max-visible-pages="maxVisiblePages"
-      />
-    </template>
+      <template v-if="content?.paginationPosition === 'top' || content?.paginationPosition === 'both'">
+        <UiPagination
+          v-if="totalProducts > 0"
+          :key="`${totalProducts}-${itemsPerPage}`"
+          :current-page="getFacetsFromURL().page ?? 1"
+          :total-items="totalProducts"
+          :page-size="itemsPerPage"
+          :max-visible-pages="maxVisiblePages"
+        />
+      </template>
+      
+      <CategorySorting class="max-md:mb-4" />
+    </div>
+  
+
     <section v-if="products?.length" :class="gridClasses" data-testid="category-grid" class="!grid-cols-2 xl:!grid-cols-3 !gap-4 xl:!gap-y-10">
       <NuxtLazyHydrate v-for="(product, index) in products" :key="productGetters.getVariationId(product)" when-visible>
         <UiProductCard :product="product" :configuration="content" :index="index" />

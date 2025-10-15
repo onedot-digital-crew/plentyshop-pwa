@@ -43,7 +43,6 @@ export default defineNuxtModule({
         (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
       }
 
-
       // Set custom font sizes
       if (config?.theme?.extend) {
         if (!config.theme.extend.fontSize) {
@@ -128,6 +127,14 @@ export default defineNuxtModule({
       const blocksItemGrid = components.find((c) => c.pascalName === 'BlocksItemGrid');
       if (blocksItemGrid) {
         blocksItemGrid.filePath = resolve('./runtime/components/blocks/ItemGrid/ItemGrid.vue');
+      }
+      const blocksSortFilter = components.find((c) => c.pascalName === 'BlocksSortFilter');
+      if (blocksSortFilter) {
+        blocksSortFilter.filePath = resolve('./runtime/components/blocks/SortFilter/SortFilter.vue');
+      }
+      const categorySorting = components.find((c) => c.pascalName === 'CategorySorting');
+      if (categorySorting) {
+        categorySorting.filePath = resolve('./runtime/components/CategorySorting.vue');
       }
       const textContent = components.find((c) => c.pascalName === 'TextContent');
       if (textContent) {

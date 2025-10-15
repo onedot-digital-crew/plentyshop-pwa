@@ -1,13 +1,13 @@
 <template>
   <div v-if="shouldRenderFacet">
-    <SfAccordionItem v-if="facet" v-model="open">
+    <SfAccordionItem v-if="facet" v-model="open" class="mb-3">
       <template #summary>
-        <div class="flex justify-between p-3 mb-2 select-none border border-gray-600">
-          <p class="text-base text-black">{{ facetGetters.getName(facet) }}</p>
-          <SfIconChevronLeft :class="['text-neutral-500', open ? 'rotate-90' : '-rotate-90']" />
+        <div class="flex justify-between p-3 select-none border border-gray-600 transition hover:text-primary-500" :class="open ? 'text-primary-500 font-semibold' : 'text-black'">
+          <p class="text-base">{{ facetGetters.getName(facet) }}</p>
+          <SfIconChevronLeft :class="['transition', open ? 'rotate-90' : '-rotate-90']" />
         </div>
       </template>
-      <div v-if="facetGetters.getType(facet) === 'feedback'">
+      <div v-if="facetGetters.getType(facet) === 'feedback'" class="border border-gray-600">
         <SfListItem v-for="(filter, index) in sortedReviews(facet)" :key="index" tag="label" class="mb-3" size="sm">
           <div class="flex items-center space-x-2">
             <span class="pt-1 flex items-center">
@@ -36,16 +36,17 @@
         </SfListItem>
       </div>
 
-      <form v-else-if="facetGetters.getType(facet) === 'price'" class="mb-4" @submit.prevent="updatePriceFilter">
+      <form v-else-if="facetGetters.getType(facet) === 'price'" class="border border-gray-600 border-t-0 p-3 flex items-center justify-between flex-wrap" @submit.prevent="updatePriceFilter">
         <div class="mb-3">
           <label for="min">
-            <UiFormLabel class="text-start">{{ t('min') }}</UiFormLabel>
+            <UiFormLabel class="text-start text-gray-600">{{ t('min') }}</UiFormLabel>
             <SfInput id="min" v-model="minPrice" :placeholder="t('min')" />
           </label>
         </div>
+        <div class="w-4 h-0.5 bg-gray-600 rounded-full mt-2" />
         <div class="mb-3">
           <label for="max">
-            <UiFormLabel class="text-start">{{ t('max') }}</UiFormLabel>
+            <UiFormLabel class="text-start text-gray-600">{{ t('max') }}</UiFormLabel>
             <SfInput id="max" v-model="maxPrice" :placeholder="t('max')" />
           </label>
         </div>
@@ -67,7 +68,7 @@
         </div>
       </form>
 
-      <div v-else class="mb-4 testing here">
+      <div v-else class="border border-gray-600 border-t-0 testing here py-3">
         <SfListItem
           v-for="(filter, index) in facetGetters.getFilters(facet)"
           :key="index"
@@ -116,7 +117,7 @@ import type { SortFilterContent } from '~/components/blocks/SortFilter/types';
 const { getFacetsFromURL, updateFilters, updatePrices } = useCategoryFilter();
 const { t } = useI18n();
 
-const open = ref(true);
+const open = ref(false);
 const props = defineProps<FilterProps>();
 const filters = facetGetters.getFilters(props.facet ?? ({} as FilterGroup)) as Filter[];
 const models = ref({} as Filters);

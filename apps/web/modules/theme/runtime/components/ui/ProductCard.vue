@@ -82,7 +82,7 @@
 
         <template v-if="key === 'rating' && configuration?.fields?.rating">
           <div class="flex items-center gap-1" :class="{ 'mb-2': !shortDescription }">
-            <SfRating size="sm" :half-increment="true" :value="4" :max="5" class="!text-black" />
+            <SfRating size="sm" :half-increment="true" :value="rating ?? 0" :max="5" class="!text-black" />
             <SfCounter class="text-small !font-normal max-md:hidden" size="xs">{{ ratingCount }}</SfCounter>
           </div>
         </template>

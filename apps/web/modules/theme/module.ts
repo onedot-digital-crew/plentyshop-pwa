@@ -1,9 +1,4 @@
-import {
-  useLogger,
-  defineNuxtModule,
-  createResolver,
-  addPlugin,
-} from '@nuxt/kit';
+import { useLogger, defineNuxtModule, createResolver, addPlugin } from '@nuxt/kit';
 import type { TailwindColors } from './types';
 import type { Config as TailwindConfig } from 'tailwindcss/types/config';
 
@@ -42,7 +37,6 @@ export default defineNuxtModule({
         (config.theme.extend.colors as TailwindColors)['gray']['600'] = '#6A6A6A';
         (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
       }
-
 
       // Set custom font sizes
       if (config?.theme?.extend) {
@@ -117,6 +111,18 @@ export default defineNuxtModule({
       if (uiProductCard) {
         uiProductCard.filePath = resolve('./runtime/components/ui/ProductCard.vue');
       }
+      const uiPurchaseCard = components.find((c) => c.pascalName === 'UiPurchaseCard');
+      if (uiPurchaseCard) {
+        uiPurchaseCard.filePath = resolve('./runtime/components/ui/PurchaseCard.vue');
+      }
+      const uiBadges = components.find((c) => c.pascalName === 'UiBadges');
+      if (uiBadges) {
+        uiBadges.filePath = resolve('./runtime/components/ui/Badges.vue');
+      }
+      const uiQuantitySelector = components.find((c) => c.pascalName === 'UiQuantitySelector');
+      if (uiQuantitySelector) {
+        uiQuantitySelector.filePath = resolve('./runtime/components/ui/QuantitySelector.vue');
+      }
       const blocksBannerCarouselBanner = components.find((c) => c.pascalName === 'BlocksBannerCarouselBanner');
       if (blocksBannerCarouselBanner) {
         blocksBannerCarouselBanner.filePath = resolve('./runtime/components/blocks/BannerCarousel/Banner.vue');
@@ -156,6 +162,30 @@ export default defineNuxtModule({
       const productSlider = components.find((c) => c.pascalName === 'ProductSlider');
       if (productSlider) {
         productSlider.filePath = resolve('./runtime/components/ProductSlider.vue');
+      }
+      const attributeBox = components.find((c) => c.pascalName === 'AttributeBox');
+      if (attributeBox) {
+        attributeBox.filePath = resolve('./runtime/components/ProductAttributes/AttributeBox.vue');
+      }
+      const attributeImage = components.find((c) => c.pascalName === 'AttributeImage');
+      if (attributeImage) {
+        attributeImage.filePath = resolve('./runtime/components/ProductAttributes/AttributeImage.vue');
+      }
+      const attributeDropdown = components.find((c) => c.pascalName === 'AttributeDropdown');
+      if (attributeDropdown) {
+        attributeDropdown.filePath = resolve('./runtime/components/ProductAttributes/AttributeDropdown.vue');
+      }
+      const lowestPrice = components.find((c) => c.pascalName === 'LowestPrice');
+      if (lowestPrice) {
+        lowestPrice.filePath = resolve('./runtime/components/LowestPrice.vue');
+      }
+      const price = components.find((c) => c.pascalName === 'Price');
+      if (price) {
+        price.filePath = resolve('./runtime/components/Price.vue');
+      }
+      const gallery = components.find((c) => c.pascalName === 'Gallery');
+      if (gallery) {
+        gallery.filePath = resolve('./runtime/components/Gallery.vue');
       }
     });
   },

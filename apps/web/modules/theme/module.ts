@@ -139,6 +139,10 @@ export default defineNuxtModule({
       if (blocksSortFilter) {
         blocksSortFilter.filePath = resolve('./runtime/components/blocks/SortFilter/SortFilter.vue');
       }
+      const blocksCategoryData = components.find((c) => c.pascalName === 'BlocksCategoryData');
+      if (blocksCategoryData) {
+        blocksCategoryData.filePath = resolve('./runtime/components/blocks/CategoryData/CategoryData.vue');
+      }
       const categorySorting = components.find((c) => c.pascalName === 'CategorySorting');
       if (categorySorting) {
         categorySorting.filePath = resolve('./runtime/components/CategorySorting.vue');

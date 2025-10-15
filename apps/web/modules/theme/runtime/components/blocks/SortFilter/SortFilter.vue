@@ -1,9 +1,9 @@
 <template>
   <div data-testid="category-sort-filter">
     <template v-for="key in props.content?.filtersOrder" :key="key">
-      <template v-if="key === 'category' && props.content?.fields.category">
+      <!-- <template v-if="key === 'category' && props.content?.fields.category">
         <CategoryTree v-if="productsCatalog.category" :category="productsCatalog.category" />
-      </template>
+      </template> -->
 
       <!-- <template v-if="key === 'sortBy' && props.content?.fields.sortBy">
         <CategorySorting class="mb-4" />

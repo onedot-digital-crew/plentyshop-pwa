@@ -219,6 +219,10 @@ export default defineNuxtModule({
       if (categoryTreeItem) {
         categoryTreeItem.filePath = resolve('./runtime/components/CategoryTree/CategoryTreeItem.vue');
       }
+      const uiPagination = components.find((c) => c.pascalName === 'UiPagination');
+      if (uiPagination) {
+        uiPagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
+      }
     });
   },
 });

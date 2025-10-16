@@ -24,6 +24,7 @@
       :to="localePath(button?.link ?? '')"
       :variant="button?.variant ?? 'primary'"
       data-testid="text-button"
+      size="lg"
       class="mt-6 md:mt-10 px-4 py-2"
     >
       {{ button?.label }}

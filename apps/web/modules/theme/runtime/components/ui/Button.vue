@@ -4,7 +4,7 @@
     :type="type"
     :disabled="disabled"
     :class="[
-      'inline-flex items-center justify-center transition text-xs py-3 px-6 lg:py-5 focus-visible:outline focus-visible:outline-offset disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
+      'inline-flex items-center justify-center transition text-xs focus-visible:outline focus-visible:outline-offset disabled:shadow-none disabled:ring-0 disabled:cursor-not-allowed',
       sizeClasses,
       variantClasses[variant],
     ]"
@@ -51,10 +51,10 @@ const sizeClasses = computed(() => {
       return [square.value ? 'p-1.5' : 'leading-5 text-sm py-1.5 px-3', 'gap-1.5'];
     }
     case SfButtonSize.lg: {
-      return [square.value ? 'p-4' : 'py-3 leading-6 px-6', 'gap-3'];
+      return [square.value ? 'p-4' : 'leading-6 py-3 px-6 lg:py-5', 'gap-3'];
     }
     default: {
-      return [square.value ? 'p-2' : 'py-2 leading-6 px-4', 'gap-2'];
+      return [square.value ? 'p-2' : 'leading-6 py-3 px-6', 'gap-2'];
     }
   }
 });
@@ -75,6 +75,6 @@ const variantClasses = {
   [SfButtonVariant.secondary]:
     'bg-white text-black hover:bg-gray-200',
   [SfButtonVariant.tertiary]:
-    'text-red-500 hover:bg-red-100 hover:text-red-800 active:bg-red-200 active:text-red-900 disabled:bg-transparent',
+    'text-black border border-gray-600',
 };
 </script>

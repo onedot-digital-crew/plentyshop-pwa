@@ -54,21 +54,29 @@
         /> -->
       </template>
     </template>
-    <CategoryTree v-if="productsCatalog.category" :category="productsCatalog.category" />
+    <CategoryTree 
+      v-if="productsCatalog.category" 
+      :category="productsCatalog.category" 
+      :category-tree-data="categoryTreeState.data" 
+      class="mt-5 lg:mt-16"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { type Category, categoryGetters } from '@plentymarkets/shop-api';
-import { useRuntimeConfig, useRoute } from 'nuxt/app';
+import { type Category, categoryGetters, type CategoryTreeItem } from '@plentymarkets/shop-api';
+import { useRuntimeConfig, useRoute, useState } from 'nuxt/app';
 import type { CategoryDataProps } from './types';
 
 const props = defineProps<CategoryDataProps>();
 
+// Get the real category tree data from the same state as the core app uses
+const categoryTreeState = useState<{ data: CategoryTreeItem[] }>('useCategoryTree', () => ({ data: [] }));
+
 // Use props.category directly for CategoryTree (Theme version includes it)
 const productsCatalog = computed(() => ({
-  category: props.category || null
+  category: props.category && Object.keys(props.category).length > 0 ? props.category : null
 }));
 
 const category = computed(() => props.category || ({} as Category));

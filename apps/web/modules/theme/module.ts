@@ -211,6 +211,14 @@ export default defineNuxtModule({
       if (narrowContainer) {
         narrowContainer.filePath = resolve('./runtime/components/NarrowContainer.vue');
       }
+      const categoryTree = components.find((c) => c.pascalName === 'CategoryTree');
+      if (categoryTree) {
+        categoryTree.filePath = resolve('./runtime/components/CategoryTree/CategoryTree.vue');
+      }
+      const categoryTreeItem = components.find((c) => c.pascalName === 'CategoryTreeItem');
+      if (categoryTreeItem) {
+        categoryTreeItem.filePath = resolve('./runtime/components/CategoryTree/CategoryTreeItem.vue');
+      }
     });
   },
 });

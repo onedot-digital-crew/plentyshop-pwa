@@ -143,6 +143,10 @@ export default defineNuxtModule({
       if (blocksCategoryData) {
         blocksCategoryData.filePath = resolve('./runtime/components/blocks/CategoryData/CategoryData.vue');
       }
+      const categoryPageContent = components.find((c) => c.pascalName === 'CategoryPageContent');
+      if (categoryPageContent) {
+        categoryPageContent.filePath = resolve('./runtime/components/CategoryPageContent/CategoryPageContent.vue');
+      }
       const categorySorting = components.find((c) => c.pascalName === 'CategorySorting');
       if (categorySorting) {
         categorySorting.filePath = resolve('./runtime/components/CategorySorting.vue');
@@ -198,6 +202,14 @@ export default defineNuxtModule({
       const gallery = components.find((c) => c.pascalName === 'Gallery');
       if (gallery) {
         gallery.filePath = resolve('./runtime/components/Gallery.vue');
+      }
+      const uiBreadcrumbs = components.find((c) => c.pascalName === 'UiBreadcrumbs');
+      if (uiBreadcrumbs) {
+        uiBreadcrumbs.filePath = resolve('./runtime/components/ui/Breadcrumbs/Breadcrumbs.vue');
+      }
+      const narrowContainer = components.find((c) => c.pascalName === 'NarrowContainer');
+      if (narrowContainer) {
+        narrowContainer.filePath = resolve('./runtime/components/NarrowContainer.vue');
       }
     });
   },

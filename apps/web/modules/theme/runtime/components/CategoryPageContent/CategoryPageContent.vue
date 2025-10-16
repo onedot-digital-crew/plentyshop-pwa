@@ -1,0 +1,36 @@
+<template>
+    <BlocksCategoryData v-bind="categoryData" :category="productsCatalog.category" class="!mt-0" />
+    <NarrowContainer class="mb-20 px-4" data-testid="category-layout">
+        <div class="md:flex gap-6" data-testid="category-page-content">
+            <CategorySidebar :is-open="isOpen" @close="close">
+                <NuxtLazyHydrate when-visible>
+                    <slot name="sidebar" />
+                </NuxtLazyHydrate>
+            </CategorySidebar>
+            <BlocksItemGrid
+                v-bind="itemGrid"
+                :total-products="totalProducts"
+                :products-per-page="itemsPerPage"
+                :products="products"
+            />
+        </div>
+    </NarrowContainer>
+</template>
+
+<script setup lang="ts">
+import { useDisclosure } from '@storefront-ui/vue';
+import type { CategoryPageContentProps } from './types';
+
+const { totalProducts, itemsPerPage = 24, products = [] } = defineProps<CategoryPageContentProps>();
+
+const { isOpen, close } = useDisclosure();
+const { getCategoryTemplateBlock, getCategoryDataTemplateBlock } = useCategoryTemplate();
+const { data: productsCatalog } = useProducts();
+
+const viewport = useViewport();
+
+const itemGrid = getCategoryTemplateBlock();
+const categoryData = getCategoryDataTemplateBlock();
+
+if (viewport.isLessThan('md')) close();
+</script>

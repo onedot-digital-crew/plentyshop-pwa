@@ -1,6 +1,7 @@
-import { useLogger, defineNuxtModule, createResolver, addPlugin } from '@nuxt/kit';
+import { useLogger, defineNuxtModule, createResolver, addPlugin, extendPages } from '@nuxt/kit';
 import type { TailwindColors } from './types';
 import type { Config as TailwindConfig } from 'tailwindcss/types/config';
+import type { NuxtPage } from '@nuxt/schema'
 
 export default defineNuxtModule({
   meta: {
@@ -222,6 +223,18 @@ export default defineNuxtModule({
       const uiPagination = components.find((c) => c.pascalName === 'UiPagination');
       if (uiPagination) {
         uiPagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
+      }
+
+
+    });
+
+    // in the setup function
+    extendPages((pages: NuxtPage[]) => {
+      
+      // Override the product page
+      const productPage = pages.find((p) => p.name === 'product-slug');
+      if (productPage) {
+        productPage.file = resolve('./runtime/pages/product/[slug].vue');
       }
     });
   },

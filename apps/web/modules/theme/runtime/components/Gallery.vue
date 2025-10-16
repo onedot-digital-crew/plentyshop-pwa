@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col md:flex-row h-full flex scroll-smooth md:gap-4 relative" data-testid="gallery">
+  <div class="flex-col h-full flex scroll-smooth md:gap-4 relative" data-testid="gallery">
     <div
       class="after:block after:pt-[100%] flex-1 relative overflow-hidden w-full max-h-[600px]"
       data-testid="gallery-images"
@@ -25,12 +25,12 @@
       </SfScrollable>
     </div>
 
-    <div class="md:-order-1 overflow-hidden flex-shrink-0 basis-auto">
+    <div class="overflow-hidden flex-shrink-0 basis-auto max-md:px-4">
       <SfScrollable
         ref="thumbsReference"
-        wrapper-class="hidden md:inline-flex"
+        wrapper-class=""
         direction="vertical"
-        class="flex-row w-full items-center md:flex-col md:h-full md:px-0 md:scroll-pl-4 snap-y snap-mandatory flex gap-0.5 md:gap-0.5 overflow-auto scrollbar-hidden"
+        class="!flex-row w-full items-center md:h-full md:px-0 md:scroll-pl-4 snap-y snap-mandatory flex gap-4 overflow-auto scrollbar-hidden"
         :active-index="activeIndex"
         :prev-disabled="activeIndex === 0"
         :next-disabled="activeIndex === images.length - 1"
@@ -58,16 +58,17 @@
           type="button"
           :aria-current="activeIndex === index"
           :aria-label="t('gallery.thumb', { index: index + 1 })"
-          class="w-20 relative shrink-0 pb-1 snap-start cursor-pointer transition-colors flex-grow-0"
+          class="size-16 lg:size-32 relative shrink-0 border-b snap-start cursor-pointer transition-colors flex-grow-0"
+          :class="[activeIndex === index ? 'border-black' : 'border-transparent']"
           @click="onChangeIndex(index)"
           @focus="onChangeIndex(index)"
         >
           <NuxtImg
             :alt="productImageGetters.getImageAlternate(image) || productImageGetters.getCleanImageName(image) || ''"
             :title="productImageGetters.getImageName(image) ? productImageGetters.getImageName(image) : null"
-            class="object-contain"
-            :width="productImageGetters.getImageWidth(image) ?? 80"
-            :height="productImageGetters.getImageHeight(image) ?? 80"
+            class="object-contain size-16 lg:size-32"
+            :width="128"
+            :height="128"
             :src="productImageGetters.getImageUrlPreview(image)"
             :quality="80"
             loading="lazy"
@@ -90,18 +91,6 @@
           </UiButton>
         </template>
       </SfScrollable>
-      <div class="flex md:hidden gap-0.5" role="group">
-        <button
-          v-for="(image, index) in images"
-          :key="productImageGetters.getImageUrl(image)"
-          type="button"
-          :aria-current="activeIndex === index"
-          :aria-label="t('gallery.thumb', { index: index + 1 })"
-          class="relative shrink-0 pb-1 border-b-4 cursor-pointer transition-colors flex-grow"
-          :class="[activeIndex === index ? 'border-primary-500' : 'border-neutral-200']"
-          @click="onChangeIndex(index)"
-        />
-      </div>
     </div>
   </div>
 </template>

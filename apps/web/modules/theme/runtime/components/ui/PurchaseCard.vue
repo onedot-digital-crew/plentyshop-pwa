@@ -4,7 +4,7 @@
       <div class="drift-zoom-image">
         <section class="p-4 xl:p-6">
           <div class="flex items-center justify-end mb-2">
-            <UiBadges class="mt-4 grow" :product="product" :use-availability="true" :availabilityEnabled="false" />
+            <UiBadges class="mt-4 grow" :product="product" :use-availability="true" :availability-enabled="false" />
             <NuxtLink data-testid="show-reviews" class="cursor-pointer flex items-center" @click="scrollToReviews">
               <SfRating
                 size="xs"
@@ -19,26 +19,7 @@
           <h1 class="font-bold text-h4 break-word" data-testid="product-name">
             {{ productGetters.getName(product) }}
           </h1>
-          <!-- <div class="flex items-center justify-center">
-              <WishlistButton
-                :product="product"
-                :quantity="quantitySelectorValue"
-                :square="viewport.isLessThan('lg')"
-                :class="{
-                  'bottom-0 right-0 mr-2 mb-2 bg-white ring-1 ring-inset ring-neutral-200 !rounded-full':
-                    viewport.isLessThan('lg'),
-                }"
-              >
-                <template v-if="viewport.isGreaterOrEquals('lg')">
-                  {{
-                    !isWishlistItem(productGetters.getVariationId(product))
-                      ? t('addToWishlist')
-                      : t('removeFromWishlist')
-                  }}
-                </template>
-              </WishlistButton>
-            </div> -->
-
+          
           <div class="flex space-x-4">
             <Price :price="priceWithProperties" :crossed-price="crossedPrice" />
             <div
@@ -93,7 +74,25 @@
             v-if="product && productGetters.possibleUnitCombination(product).length > 1"
             :product="product"
           />
-
+          <div class="flex items-center justify-center">
+            <WishlistButton
+              :product="product"
+              :quantity="quantitySelectorValue"
+              :square="viewport.isLessThan('lg')"
+              :class="{
+                'bottom-0 right-0 mr-2 mb-2 bg-white ring-1 ring-inset ring-neutral-200 !rounded-full':
+                  viewport.isLessThan('lg'),
+              }"
+            >
+              <template v-if="viewport.isGreaterOrEquals('lg')">
+                {{
+                  !isWishlistItem(productGetters.getVariationId(product))
+                    ? t('addToWishlist')
+                    : t('removeFromWishlist')
+                }}
+              </template>
+            </WishlistButton>
+          </div>
           <div class="mt-4">
             <div class="flex flex-row gap-4">
               <UiQuantitySelector

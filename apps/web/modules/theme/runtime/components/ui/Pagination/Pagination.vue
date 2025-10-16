@@ -10,7 +10,7 @@
       :disabled="pagination.selectedPage <= 1 || disabled"
       variant="tertiary"
       data-testid="pagination-previous"
-      class="!p-2 size-12"
+      class="!p-2 size-12 border border-gray-600"
       @click="previousPage"
     >
       <template #prefix>
@@ -150,7 +150,7 @@
       :disabled="pagination.selectedPage >= pagination.totalPages || disabled"
       variant="tertiary"
       data-testid="pagination-next"
-      class="!p-2 size-12"
+      class="!p-2 size-12 border border-gray-600"
       @click="nextPage"
     >
       <span class="sr-only">{{ t('next') }}</span>

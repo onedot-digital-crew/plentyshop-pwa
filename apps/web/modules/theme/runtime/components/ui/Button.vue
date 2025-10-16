@@ -75,6 +75,6 @@ const variantClasses = {
   [SfButtonVariant.secondary]:
     'bg-white text-black hover:bg-gray-200',
   [SfButtonVariant.tertiary]:
-    'text-black border border-gray-600',
+    'text-black',
 };
 </script>

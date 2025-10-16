@@ -14,11 +14,16 @@
                 :products="products"
             />
         </div>
+      
+        <div v-if="productsCatalog.category" class="text-base mx-auto max-w-4xl pt-10 lg:pt-16">
+            <div v-html="categoryGetters.getCategoryDescription2(productsCatalog.category)" />
+        </div>
     </NarrowContainer>
 </template>
 
 <script setup lang="ts">
 import { useDisclosure } from '@storefront-ui/vue';
+import { categoryGetters } from '@plentymarkets/shop-api';
 import type { CategoryPageContentProps } from './types';
 
 const { totalProducts, itemsPerPage = 24, products = [] } = defineProps<CategoryPageContentProps>();

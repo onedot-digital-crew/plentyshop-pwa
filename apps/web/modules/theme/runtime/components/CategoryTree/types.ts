@@ -1,4 +1,4 @@
-import type { Category } from '@plentymarkets/shop-api';
+import type { Category, CategoryTreeItem } from '@plentymarkets/shop-api';
 
 export type CategoryTreeProps = {
   category: Category;
@@ -9,4 +9,5 @@ export type CategoryTreeItemType = {
   href: string;
   selected?: boolean;
   count?: number;
+  category?: CategoryTreeItem;
 };

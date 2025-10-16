@@ -17,6 +17,7 @@
                 :name="categoryTreeGetters.getName(categoryItem)"
                 :href="localePath(buildCategoryMenuLink(categoryItem, categoryTree))"
                 :count="categoryTreeGetters.getCount(categoryItem)"
+                :category="categoryItem"
             />
         </SfScrollable>
     </NarrowContainer>
@@ -49,12 +50,6 @@ const buildCategoryMenuLink = (category: CategoryTreeItem, tree: CategoryTreeIte
 
 // Simplified localization functions
 const localePath = (path: string) => path;
-const t = (key: string) => {
-  const translations: Record<string, string> = {
-    category: 'Kategorie'
-  };
-  return translations[key] || key;
-};
 
 const categoryTreeItem = computed(() => {
   if (!categoryTree.value.length) return null;

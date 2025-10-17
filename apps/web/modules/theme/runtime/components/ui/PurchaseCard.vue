@@ -7,20 +7,24 @@
             <UiBadges class="mt-4 grow" :product="product" :use-availability="true" :availability-enabled="false" />
             <NuxtLink data-testid="show-reviews" class="cursor-pointer flex items-center" @click="scrollToReviews">
               <SfRating
-                size="xs"
+                size="sm"
                 :half-increment="true"
                 :value="reviewGetters.getAverageRating(reviewAverage, 'half')"
                 :max="5"
+                class="!text-black"
               />
-              <SfCounter class="ml-1" size="xs">{{ reviewGetters.getTotalReviews(reviewAverage) }}</SfCounter>
+              <SfCounter class="ml-1 !font-normal !text-base" size="xs">{{ reviewGetters.getTotalReviews(reviewAverage) }}</SfCounter>
             </NuxtLink>
           </div>
 
-          <h1 class="font-bold text-h4 break-word" data-testid="product-name">
+          <h1 class="font-bold uppercase text-h4 break-word" data-testid="product-name">
             {{ productGetters.getName(product) }}
           </h1>
+          <p v-if="product.texts?.name2" class="text-base font-semibold">
+            {{ product.texts.name2 }}
+          </p>
           
-          <div class="flex space-x-4">
+          <div class="flex space-x-4 mt-3">
             <Price :price="priceWithProperties" :crossed-price="crossedPrice" />
             <div
               v-if="(productBundleGetters?.getBundleDiscount(product) ?? 0) > 0 && showBundleComponents"
@@ -38,14 +42,14 @@
             :unit-content="productGetters.getUnitContent(product)"
             :unit-name="productGetters.getUnitName(product)"
           />
-          <div class="text-base text-zinc-500 flex gap-1">
+          <div class="text-base text-gray-600 flex gap-1">
             <span>{{ showNetPrices ? t('itemExclVAT') : t('itemInclVAT') }}</span>
             <i18n-t keypath="excludedShipping" scope="global">
               <template #shipping>
                 <SfLink
                   :href="localePath(paths.shipping)"
                   target="_blank"
-                  class="focus:outline text-zinc-500 focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
+                  class="focus:outline text-gray-600 focus:outline-offset-2 focus:outline-2 outline-secondary-600 rounded"
                 >
                   {{ t('delivery') }}
                 </SfLink>
@@ -59,7 +63,7 @@
 
           <div
             v-if="productGetters.getShortDescription(product).length > 0"
-            class="mb-4 font-normal typography-text-sm whitespace-pre-line break-words"
+            class="mb-4 text-gray-600 font-normal text-base whitespace-pre-line break-words"
             data-testid="product-description"
             v-html="productGetters.getShortDescription(product)"
           />
@@ -98,7 +102,7 @@
               <UiQuantitySelector
                 :min-value="productGetters.getMinimumOrderQuantity(product)"
                 :value="quantitySelectorValue"
-                class="min-w-[145px] shrink-0"
+                class="min-w-20 shrink-0"
                 @change-quantity="changeQuantity"
               />
               <SfTooltip

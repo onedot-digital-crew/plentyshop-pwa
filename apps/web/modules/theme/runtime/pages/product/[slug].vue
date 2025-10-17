@@ -1,12 +1,12 @@
 <template>
   <NuxtLayout name="default" :breadcrumbs="breadcrumbs">
-    <div class="bg-gray-100 "> 
+    <div class="bg-gray-100 lg:pt-6"> 
       <NarrowContainer class="max-md:px-0">
-        <div class="md:grid md:grid-cols-2 lg:grid-cols-5 gap-x-6">
-          <section class="md:h-full xl:max-h-[700px] lg:col-span-3">
+        <div class="md:grid md:grid-cols-2 xl:grid-cols-5 gap-x-6">
+          <section class="md:h-full xl:max-h-[700px] xl:col-span-3">
             <Gallery :images="addModernImageExtensionForGallery(productGetters.getGallery(product))" class="mix-blend-multiply pb-6 lg:pb-10" />
           </section>
-          <section class="mb-10 pt-6 md:pb-10 md:mb-0 lg:col-span-2">
+          <section class="mb-10 md:pb-10 md:mb-0 xl:col-span-2">
             <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
           </section>
         </div>
@@ -15,8 +15,7 @@
     </div>
     <NarrowContainer>
       <section class="md:mt-8">
-        <UiDivider class="mt-4 mb-2 md:mt-8" />
-        <section ref="recommendedSection" class="mx-4 mt-28 mb-20">
+        <section ref="recommendedSection" class="mt-28 mb-20">
           <component
             :is="RecommendedProductsAsync"
             v-if="showRecommended"
@@ -24,8 +23,15 @@
           />
         </section>
         <NuxtLazyHydrate when-visible>
-          <ProductAccordion v-if="product" :product="product" />
+          <ProductAccordion v-if="product" :product="product" class="max-w-5xl mx-auto mb-10"/>
         </NuxtLazyHydrate>
+      </section>
+    </NarrowContainer>
+    <div class="bg-gray-800 text-white h-96 flex items-center justify-center">
+      <span>Placeholder Flex Content</span>
+    </div>
+    <NarrowContainer>
+      <section class="max-w-5xl mx-auto py-16">
         <ReviewsAccordion
           v-if="product"
           :product="product"

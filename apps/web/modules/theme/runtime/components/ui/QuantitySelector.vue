@@ -12,7 +12,7 @@
           variant="tertiary"
           :disabled="disabled || count <= minValue"
           square
-          class="rounded-none !text-black !px-4"
+          class="rounded-none !text-black !px-2 lg:!px-4"
           :aria-controls="inputId"
           :aria-label="t('quantitySelectorDecrease')"
           data-testid="quantity-selector-decrease-button"
@@ -26,7 +26,7 @@
         variant="tertiary"
         :disabled="disabled || count <= minValue"
         square
-        class="rounded-none !text-black !px-4"
+        class="rounded-none !text-black !px-2 lg:!px-4"
         :aria-controls="inputId"
         :aria-label="t('quantitySelectorDecrease')"
         data-testid="quantity-selector-decrease-button"
@@ -52,7 +52,7 @@
         variant="tertiary"
         :disabled="disabled || count >= maxValue"
         square
-        class="rounded-none !text-black !px-4"
+        class="rounded-none !text-black !px-2 lg:!px-4"
         :aria-controls="inputId"
         :aria-label="t('quantitySelectorIncrease')"
         data-testid="quantity-selector-increase-button"

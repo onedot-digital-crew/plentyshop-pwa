@@ -224,6 +224,22 @@ export default defineNuxtModule({
       if (uiPagination) {
         uiPagination.filePath = resolve('./runtime/components/ui/Pagination/Pagination.vue');
       }
+      const productAccordion = components.find((c) => c.pascalName === 'ProductAccordion');
+      if (productAccordion) {
+        productAccordion.filePath = resolve('./runtime/components/ProductAccordion/ProductAccordion.vue');
+      }
+      const reviewsAccordion = components.find((c) => c.pascalName === 'ReviewsAccordion');
+      if (reviewsAccordion) {
+        reviewsAccordion.filePath = resolve('./runtime/components/ReviewsAccordion/ReviewsAccordion.vue');
+      }
+      const uiReviewStatistics = components.find((c) => c.pascalName === 'UiReviewStatistics');
+      if (uiReviewStatistics) {
+        uiReviewStatistics.filePath = resolve('./runtime/components/ui/ReviewStatistics/ReviewStatistics.vue');
+      }
+      const uiReview = components.find((c) => c.pascalName === 'UiReview');
+      if (uiReview) {
+        uiReview.filePath = resolve('./runtime/components/ui/Review/Review.vue');
+      }
 
 
     });

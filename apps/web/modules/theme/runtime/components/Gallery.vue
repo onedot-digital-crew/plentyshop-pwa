@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col h-full flex scroll-smooth md:gap-4 relative" data-testid="gallery">
     <div
-      class="after:block after:pt-[100%] flex-1 relative overflow-hidden w-full max-h-[600px]"
+      class="after:block after:pt-[100%] flex-1 relative overflow-hidden w-full md:max-h-[400px] xl:max-h-[600px]"
       data-testid="gallery-images"
     >
       <SfScrollable
@@ -19,6 +19,7 @@
           :images="images"
           :image="image"
           :index="index"
+          class="aspect-square"
           :active-index="activeIndex"
           :is-first-image="index === 0"
         />
@@ -66,7 +67,7 @@
           <NuxtImg
             :alt="productImageGetters.getImageAlternate(image) || productImageGetters.getCleanImageName(image) || ''"
             :title="productImageGetters.getImageName(image) ? productImageGetters.getImageName(image) : null"
-            class="object-contain size-16 lg:size-32"
+            class="object-contain w-full h-full"
             :width="128"
             :height="128"
             :src="productImageGetters.getImageUrlPreview(image)"

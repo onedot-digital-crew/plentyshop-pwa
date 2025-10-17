@@ -1,6 +1,6 @@
 <template>
-  <div class="text-2xl py-1 flex space-x-4">
-    <span class="mr-2 text-zinc-900 font-bold" data-testid="price">
+  <div class="text-s py-1 flex space-x-4">
+    <span class="mr-2 text-black font-bold" data-testid="price">
       <span>{{ format(price) }}</span>
       <span>{{ t('asterisk') }} </span>
     </span>

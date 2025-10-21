@@ -32,11 +32,14 @@ export default defineNuxtModule({
         if (!(config.theme.extend.colors as TailwindColors)['gray']) {
           (config.theme.extend.colors as TailwindColors)['gray'] = {};
         }
-        (config.theme.extend.colors as TailwindColors)['gray']['100'] = '#F7F7F7';
-        (config.theme.extend.colors as TailwindColors)['gray']['200'] = '#D6D6D6';
-        (config.theme.extend.colors as TailwindColors)['gray']['300'] = '#ACACAC';
-        (config.theme.extend.colors as TailwindColors)['gray']['600'] = '#6A6A6A';
-        (config.theme.extend.colors as TailwindColors)['gray']['800'] = '#5A5A5A';
+        const gray = (config.theme.extend.colors as TailwindColors)['gray'];
+        if (gray) {
+          gray['100'] = '#F7F7F7';
+          gray['200'] = '#D6D6D6';
+          gray['300'] = '#ACACAC';
+          gray['600'] = '#6A6A6A';
+          gray['800'] = '#5A5A5A';
+        }
       }
 
       // Set custom font sizes
@@ -246,7 +249,7 @@ export default defineNuxtModule({
 
     // in the setup function
     extendPages((pages: NuxtPage[]) => {
-      
+
       // Override the product page
       const productPage = pages.find((p) => p.name === 'product-slug');
       if (productPage) {

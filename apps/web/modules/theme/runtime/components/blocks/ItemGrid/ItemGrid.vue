@@ -31,10 +31,10 @@
           :max-visible-pages="maxVisiblePages"
         />
       </template>
-      
+
       <CategorySorting class="max-md:mb-4" />
     </div>
-  
+
 
     <section v-if="products?.length" :class="gridClasses" data-testid="category-grid" class="!grid-cols-2 xl:!grid-cols-3 !gap-4 xl:!gap-y-10">
       <NuxtLazyHydrate v-for="(product, index) in products" :key="productGetters.getVariationId(product)" when-visible>
@@ -76,7 +76,7 @@ import { productGetters } from '@plentymarkets/shop-api';
 import { SfLink } from '@storefront-ui/vue';
 import { paths } from '~/utils/paths';
 import { gridClassFor } from '~/utils/grid';
-import type { ItemGridProps } from './types';
+import type { ItemGridProps } from '~/components/blocks/ItemGrid/types';
 
 const { t } = useI18n();
 const { getFacetsFromURL } = useCategoryFilter();

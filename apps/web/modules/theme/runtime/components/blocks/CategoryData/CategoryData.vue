@@ -54,10 +54,10 @@
         /> -->
       </template>
     </template>
-    <CategoryTree 
-      v-if="productsCatalog.category" 
-      :category="productsCatalog.category" 
-      :category-tree-data="categoryTreeState.data" 
+    <CategoryTree
+      v-if="productsCatalog.category"
+      :category="productsCatalog.category"
+      :category-tree-data="categoryTreeState.data"
       class="mt-5 lg:mt-16"
     />
   </div>
@@ -67,7 +67,7 @@
 import { computed } from 'vue';
 import { type Category, categoryGetters, type CategoryTreeItem } from '@plentymarkets/shop-api';
 import { useRuntimeConfig, useRoute, useState } from 'nuxt/app';
-import type { CategoryDataProps } from './types';
+import type { CategoryDataProps } from '~/components/blocks/CategoryData/types';
 
 const props = defineProps<CategoryDataProps>();
 
@@ -92,18 +92,18 @@ const breadcrumbs = computed(() => {
   if (category.value) {
     const breadcrumb = [];
     const categoryName = categoryGetters.getCategoryName(category.value);
-    
+
     // Add home link
     breadcrumb.push({ name: 'Home', link: '/' });
-    
+
     // Add current category
     if (categoryName) {
       breadcrumb.push({ name: categoryName, link: route.path });
     }
-    
+
     return breadcrumb;
   }
-  
+
   return [];
 });
 
@@ -113,16 +113,16 @@ const domain = runtimeConfig.public?.domain ?? '';
 const categoryImage = computed(() => {
   const categoryDetails = categoryGetters.getCategoryDetails(category.value);
   let imagePath = '';
-  
+
   // Check for image path in category details
   if (categoryDetails && categoryDetails.imagePath) {
     imagePath = categoryDetails.imagePath;
   } else if (categoryDetails && categoryDetails.plenty_category_details_image_path) {
     imagePath = categoryDetails.plenty_category_details_image_path;
   }
-  
+
   if (!imagePath) return null;
-  
+
   // Handle relative vs absolute URLs
   if (imagePath.startsWith('http')) {
     return imagePath;

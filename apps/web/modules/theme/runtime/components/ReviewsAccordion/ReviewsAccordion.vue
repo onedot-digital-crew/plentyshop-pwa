@@ -23,14 +23,14 @@
             :page-size="config.defaultItemsPerPage"
             :max-visible-pages="maxVisiblePages"
             current-page-name="feedbackPage"
-        />    
+        />
     </div>
 </template>
 
 <script lang="ts" setup>
 import { productGetters, reviewGetters } from '@plentymarkets/shop-api';
 import { SfLoaderCircular } from '@storefront-ui/vue';
-import type { ProductAccordionPropsType } from './types';
+import type { ProductAccordionPropsType } from '~/components/ReviewsAccordion/types';
 
 const { product } = defineProps<ProductAccordionPropsType>();
 

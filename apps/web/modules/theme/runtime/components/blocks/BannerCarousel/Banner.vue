@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import type { BannerProps } from './types';
+import type { BannerProps } from '~/components/blocks/BannerCarousel/types';
 
 const NuxtLink = resolveComponent('NuxtLink');
 

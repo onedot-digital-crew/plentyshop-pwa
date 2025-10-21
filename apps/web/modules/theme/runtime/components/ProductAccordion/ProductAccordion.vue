@@ -10,7 +10,7 @@
       ]"
     >
       <template #summary>
-        <h2 
+        <h2
             class="font-bold text-xs transition hover:text-black"
             :class="[
                 productDetailsOpen ? 'text-black' : 'text-gray-600'
@@ -31,7 +31,7 @@
       ]"
     >
       <template #summary>
-        <h2 
+        <h2
             class="font-bold text-xs transition hover:text-black"
             :class="[
                 technicalDataOpen ? 'text-black' : 'text-gray-600'
@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import { productGetters } from '@plentymarkets/shop-api';
-import type { ProductAccordionPropsType } from './types';
+import type { ProductAccordionPropsType } from '~/components/ProductAccordion/types';
 
 const props = defineProps<ProductAccordionPropsType>();
 

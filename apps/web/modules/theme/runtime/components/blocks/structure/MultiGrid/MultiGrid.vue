@@ -1,6 +1,10 @@
 <template>
   <div :style="gridInlineStyle">
-    <div data-testid="multi-grid-structure" :class="getGridClasses()" class="max-w-screen-3xl mx-auto lg:px-10 mt-3 px-4 md:px-6 py-10 lg:py-20">
+    <div
+      data-testid="multi-grid-structure"
+      :class="getGridClasses()"
+      class="max-w-screen-3xl mx-auto lg:px-10 mt-3 px-4 md:px-6 py-10 lg:py-20"
+    >
       <div
         v-for="(column, colIndex) in columns"
         :key="colIndex"
@@ -14,12 +18,12 @@
             class="pointer-events-none absolute inset-0 opacity-0 group-hover/row:opacity-100"
             style="box-shadow: inset 0 0 0 2px #7c3aed"
           />
-  
+
           <div
             v-if="showOverlay(row)"
             class="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover/row:opacity-100 bg-purple-600/15"
           />
-  
+
           <div
             class="absolute inset-0 z-30 flex items-center justify-center opacity-0 invisible pointer-events-none"
             :class="
@@ -30,7 +34,7 @@
           >
             <UiBlockActions v-if="showOverlay(row)" :block="row" :index="colIndex" :actions="getBlockActions()" />
           </div>
-  
+
           <slot name="content" :content-block="row" />
         </div>
       </div>
@@ -82,7 +86,7 @@ const gridInlineStyle = computed(() => ({
 }));
 const getGridClasses = () => {
   const columnCount = configuration.columnWidths.length;
-  return gridClassFor({ mobile: 1, tablet: 2, desktop: columnCount }, [gridGapClass.value, 'items-center']);
+  return gridClassFor({ mobile: 1, tablet: 2, desktop: columnCount }, [gridGapClass.value || '', 'items-center']);
 };
 const getColumnClasses = (colIndex: number) => {
   const columnCount = configuration.columnWidths.length;
@@ -121,7 +125,7 @@ const readAlignment = (block: AlignableBlock): 'left' | 'right' | undefined => {
 };
 
 const pairWithSlots = computed<Block[]>(() => {
-  const list = content.map((block) => ({ ...block }));
+  const list:Block[] = content.map((block) => ({ ...block }));
 
   const alignableIndex = list.findIndex(isAlignable);
 
@@ -133,8 +137,8 @@ const pairWithSlots = computed<Block[]>(() => {
   const selfSlot = alignment === 'right' ? 1 : 0;
   const sibling = alignableIndex === 0 ? 1 : 0;
 
-  list[alignableIndex] = { ...list[alignableIndex], parent_slot: selfSlot };
-  list[sibling] = { ...list[sibling], parent_slot: 1 - selfSlot };
+  list[alignableIndex] = { ...list[alignableIndex], parent_slot: selfSlot } as Block;
+  list[sibling] = { ...list[sibling], parent_slot: 1 - selfSlot } as Block;
 
   return list;
 });
@@ -142,12 +146,11 @@ const pairWithSlots = computed<Block[]>(() => {
 const columns = computed<Block[][]>(() => {
   const blocks = ref([] as Block[][]);
   pairWithSlots.value.forEach((block) => {
-    if (block.parent_slot !== undefined) {
+    if (block.parent_slot) {
       if (!blocks.value[block.parent_slot]) {
         blocks.value[block.parent_slot] = [];
       }
-
-      blocks.value[block.parent_slot].push(block);
+      blocks.value[block.parent_slot]!.push(block);
     }
   });
   return blocks.value;

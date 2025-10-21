@@ -1,53 +1,56 @@
 <template>
   <NuxtLayout name="default" :breadcrumbs="breadcrumbs">
-    <div class="bg-gray-100 lg:pt-6"> 
-      <NarrowContainer class="max-md:px-0">
-        <div class="md:grid md:grid-cols-2 xl:grid-cols-5 gap-x-6">
-          <section class="md:h-full xl:max-h-[700px] xl:col-span-3">
-            <Gallery :images="addModernImageExtensionForGallery(productGetters.getGallery(product))" class="mix-blend-multiply pb-6 lg:pb-10" />
+    <EditablePage v-if="config.enableProductEditing" :identifier="'0'" :type="'product'" />
+
+    <NarrowContainer v-else>
+      <div class="bg-gray-100 lg:pt-6">
+        <NarrowContainer class="max-md:px-0">
+          <div class="md:grid md:grid-cols-2 xl:grid-cols-5 gap-x-6">
+            <section class="md:h-full xl:max-h-[700px] xl:col-span-3">
+              <Gallery :images="addModernImageExtensionForGallery(productGetters.getGallery(product))" class="mix-blend-multiply pb-6 lg:pb-10" />
+            </section>
+            <section class="mb-10 md:pb-10 md:mb-0 xl:col-span-2">
+              <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
+            </section>
+          </div>
+        </NarrowContainer>
+
+      </div>
+      <NarrowContainer>
+        <section class="md:mt-8">
+          <section ref="recommendedSection" class="mt-28 mb-20">
+            <component
+              :is="RecommendedProductsAsync"
+              v-if="showRecommended"
+              :category-id="productGetters.getCategoryIds(product)[0] ?? ''"
+            />
           </section>
-          <section class="mb-10 md:pb-10 md:mb-0 xl:col-span-2">
-            <UiPurchaseCard v-if="product" :product="product" :review-average="countsProductReviews" />
-          </section>
-        </div>
-      </NarrowContainer>
-      
-    </div>
-    <NarrowContainer>
-      <section class="md:mt-8">
-        <section ref="recommendedSection" class="mt-28 mb-20">
-          <component
-            :is="RecommendedProductsAsync"
-            v-if="showRecommended"
-            :category-id="productGetters.getCategoryIds(product)[0]"
-          />
+          <NuxtLazyHydrate when-visible>
+            <ProductAccordion v-if="product" :product="product" class="max-w-5xl mx-auto mb-10"/>
+          </NuxtLazyHydrate>
         </section>
-        <NuxtLazyHydrate when-visible>
-          <ProductAccordion v-if="product" :product="product" class="max-w-5xl mx-auto mb-10"/>
-        </NuxtLazyHydrate>
-      </section>
-    </NarrowContainer>
-    <div class="bg-gray-800 text-white h-96 flex items-center justify-center">
-      <span>Placeholder Flex Content</span>
-    </div>
-    <NarrowContainer>
-      <section class="max-w-5xl mx-auto py-16">
-        <ReviewsAccordion
-          v-if="product"
-          :product="product"
-          :total-reviews="reviewGetters.getTotalReviews(countsProductReviews)"
-        />
+      </NarrowContainer>
+      <div class="bg-gray-800 text-white h-96 flex items-center justify-center">
+        <span>Placeholder Flex Content</span>
+      </div>
+      <NarrowContainer>
+        <section class="max-w-5xl mx-auto py-16">
+          <ReviewsAccordion
+            v-if="product"
+            :product="product"
+            :total-reviews="reviewGetters.getTotalReviews(countsProductReviews)"
+          />
 
-        <div class="p-4 flex">
-          <p class="font-bold leading-6 cursor-pointer" data-testid="open-manufacturer-drawer" @click="openDrawer()">
-            <span>{{ t('legalDetails') }}</span>
-            <SfIconChevronRight />
-          </p>
-        </div>
-      </section>
-      
-    </NarrowContainer>
+          <div class="p-4 flex">
+            <p class="font-bold leading-6 cursor-pointer" data-testid="open-manufacturer-drawer" @click="openDrawer()">
+              <span>{{ t('legalDetails') }}</span>
+              <SfIconChevronRight />
+            </p>
+          </div>
+        </section>
 
+      </NarrowContainer>
+    </NarrowContainer>
     <UiReviewModal />
     <ProductLegalDetailsDrawer v-if="open" :product="product" />
   </NuxtLayout>
@@ -71,15 +74,20 @@ const { data: categoryTree } = useCategoryTree();
 const { open, openDrawer } = useProductLegalDetailsDrawer();
 const { setPageMeta } = usePageMeta();
 
+const config = useRuntimeConfig().public;
+
 definePageMeta({
   layout: false,
   path: '/:slug*_:itemId',
   validate: async (route) => {
     return validateProductParams(route.params);
   },
+  type: 'product',
+  isBlockified: false,
+  identifier: 0,
 });
 const RecommendedProductsAsync = defineAsyncComponent(
-  async () => await import('@/components/RecommendedProducts/RecommendedProducts.vue'),
+  async () => await import('~/components/RecommendedProducts/RecommendedProducts.vue'),
 );
 
 const showRecommended = ref(false);
@@ -166,7 +174,8 @@ const observeRecommendedSection = () => {
   if (import.meta.client && recommendedSection.value) {
     const observer = new window.IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        const entry = entries[0];
+        if (entry?.isIntersecting) {
           showRecommended.value = true;
           observer.disconnect();
         }

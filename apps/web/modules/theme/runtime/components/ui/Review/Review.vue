@@ -123,7 +123,7 @@ import {
   SfTooltip,
   SfIconBase,
 } from '@storefront-ui/vue';
-import type { ReviewProps } from './types';
+import type { ReviewProps } from '~/components/ui/Review/types';
 import { type ReviewItem, reviewGetters, productGetters } from '@plentymarkets/shop-api';
 import { defaults } from '~/composables';
 import { penPath } from '~/assets/icons/paths/pen';
@@ -148,9 +148,9 @@ const tooltipReplyLabel = (reply: ReviewItem) =>
   reviewGetters.getReviewVisibility(reply) ? t('review.tooltipVisibilityOn') : t('review.tooltipVisibilityOff');
 
 const isAnswerEditable = (replyItem: ReviewItem) =>
-  replyItem.sourceRelation[0].feedbackRelationSourceId === user.value?.id?.toString();
+  replyItem.sourceRelation?.[0]?.feedbackRelationSourceId === user.value?.id?.toString();
 
 const isEditable = computed(
-  () => reviewItem.value.sourceRelation[0].feedbackRelationSourceId === user.value?.id?.toString(),
+  () => reviewItem.value.sourceRelation?.[0]?.feedbackRelationSourceId === user.value?.id?.toString(),
 );
 </script>

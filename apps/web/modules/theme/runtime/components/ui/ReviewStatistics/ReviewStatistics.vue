@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { SfRating, SfProgressLinear, SfIconStarFilled } from '@storefront-ui/vue';
-import type { ReviewStatisticsProps } from './types';
+import type { ReviewStatisticsProps } from '~/components/ui/ReviewStatistics/types';
 import { productGetters, reviewGetters } from '@plentymarkets/shop-api';
 import { defaults } from '~/composables';
 

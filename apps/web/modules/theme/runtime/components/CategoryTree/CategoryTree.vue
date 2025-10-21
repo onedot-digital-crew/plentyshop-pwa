@@ -28,7 +28,7 @@
 import { computed } from 'vue';
 import { categoryGetters, categoryTreeGetters, type CategoryTreeItem } from '@plentymarkets/shop-api';
 import { SfScrollable } from '@storefront-ui/vue';
-import type { CategoryTreeProps } from './types';
+import type { CategoryTreeProps } from '~/components/CategoryTree/types';
 
 // Get category tree data from props or use empty array
 interface ExtendedCategoryTreeProps extends CategoryTreeProps {

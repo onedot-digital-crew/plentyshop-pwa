@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { SfSelect } from '@storefront-ui/vue';
-import type { AttributeSelectProps } from './types';
+import type { AttributeSelectProps } from '~/components/ProductAttributes/types';
 import { productAttributeGetters } from '@plentymarkets/shop-api';
 import { number, object } from 'yup';
 import { useForm, ErrorMessage } from 'vee-validate';

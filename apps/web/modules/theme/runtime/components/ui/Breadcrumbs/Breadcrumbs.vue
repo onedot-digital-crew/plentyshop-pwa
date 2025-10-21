@@ -1,6 +1,6 @@
 <template>
-  <nav 
-    data-testid="breadcrumbs" 
+  <nav
+    data-testid="breadcrumbs"
     class="inline-flex items-center text-sm font-normal"
     :class="{ 'text-white': whitecolor }"
   >
@@ -46,8 +46,8 @@
         :key="item.name"
         class="peer hidden sm:flex items-center peer-[:nth-of-type(even)]:before:content-['/'] peer-[:nth-of-type(even)]:before:px-2 peer-[:nth-of-type(even)]:before:leading-5 last-of-type:flex last-of-type:before:font-normal last-of-type:font-medium"
         :class="[
-          whitecolor 
-            ? 'text-white/70 last-of-type:text-white last-of-type:before:text-white/50' 
+          whitecolor
+            ? 'text-white/70 last-of-type:text-white last-of-type:before:text-white/50'
             : 'text-neutral-500 last-of-type:text-neutral-900 last-of-type:before:text-neutral-500'
         ]"
       >
@@ -69,21 +69,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, resolveComponent } from 'vue';
 import { SfDropdown, SfLink, SfIconMoreHoriz } from '@storefront-ui/vue';
-import { useRoute, useHead } from 'nuxt/app';
 import type { BreadcrumbsProps } from './types';
 
 const { breadcrumbs, whitecolor = false } = defineProps<BreadcrumbsProps>();
 
-// Simplified localization - you can enhance this later
-const localePath = (path: string) => path;
-const t = (key: string) => {
-  const translations: Record<string, string> = {
-    breadcrumbsDropdownText: 'Show all breadcrumbs'
-  };
-  return translations[key] || key;
-};
+const localePath = useLocalePath();
+const { t } = useI18n();
 
 const dropdownOpened = ref(false);
 const close = () => {

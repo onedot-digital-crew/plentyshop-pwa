@@ -37,18 +37,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
 import { SfTooltip } from '@storefront-ui/vue';
-import type { AttributeSelectProps } from './types';
+import type { AttributeSelectProps } from '~/components/ProductAttributes/types';
 import type { VariationMapProductAttributeValue } from '@plentymarkets/shop-api';
 import { productAttributeGetters } from '@plentymarkets/shop-api';
 import { object, number } from 'yup';
 import { useForm, ErrorMessage } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/yup';
-import { useI18n } from 'vue-i18n';
-import { useRuntimeConfig } from 'nuxt/app';
-import { useProductAttributes } from '../../../../../composables/useProductAttributes';
-import { useValidatorAggregator } from '../../../../../composables/useValidatorAggregator';
 
 const { updateValue, getValue } = useProductAttributes();
 const { registerValidator, registerInvalidFields } = useValidatorAggregator('attributes');

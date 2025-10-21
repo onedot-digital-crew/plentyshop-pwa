@@ -10,21 +10,6 @@
     </template>
 
     <div data-testid="text-card-form">
-      <div class="py-2">
-        <div class="flex items-center justify-between gap-3">
-          <UiFormLabel for="keep-transparent" class="m-0">
-            {{ getEditorTranslation('enable-filters-label') }}
-          </UiFormLabel>
-
-          <SfSwitch
-            id="keep-transparent"
-            v-model="sortFilterBlock.enableFilters"
-            data-testid="switch-keep-transparent"
-            class="checked:bg-editor-button checked:before:hover:bg-editor-button checked:border-gray-500 checked:hover:border:bg-gray-700 hover:border-gray-700 hover:before:bg-gray-700 checked:hover:bg-gray-300 checked:hover:border-gray-400"
-          />
-        </div>
-      </div>
-
       <div class="py-4">
         <draggable
           v-if="sortFilterBlock.filtersOrder.length"
@@ -95,61 +80,14 @@
           </SfInput>
         </label>
       </div>
-
-      <div class="py-2">
-        <UiFormLabel>{{ getEditorTranslation('items-per-page-label') }}</UiFormLabel>
-        <div class="w-full inline-flex rounded-lg border border-gray-300 bg-white text-gray-700 overflow-hidden">
-          <div
-            for="items-per-page-10"
-            class="flex items-center justify-center w-1/4 px-4 py-2 cursor-pointer text-sm border-r"
-            :class="{ 'bg-gray-100 text-gray-900 font-semibold': itemsPerPageSelected('10') }"
-            data-testid="sort-filter-form-items-per-page-10"
-            @click="sortFilterBlock.itemsPerPage = '10'"
-          >
-            <SfIconCheck :class="{ invisible: !itemsPerPageSelected('10') }" class="mr-1 w-[1.1rem]" />
-            10
-          </div>
-          <div
-            for="items-per-page-20"
-            class="flex items-center justify-center w-1/4 px-4 py-2 cursor-pointer text-sm border-r"
-            :class="{ 'bg-gray-100 text-gray-900 font-semibold': itemsPerPageSelected('20') }"
-            data-testid="sort-filter-form-items-per-page-20"
-            @click="sortFilterBlock.itemsPerPage = '20'"
-          >
-            <SfIconCheck :class="{ invisible: !itemsPerPageSelected('20') }" class="mr-1 w-[1.1rem]" />
-            20
-          </div>
-          <div
-            for="items-per-page-50"
-            class="flex items-center justify-center w-1/4 px-4 py-2 cursor-pointer text-sm border-r"
-            :class="{ 'bg-gray-100 text-gray-900 font-semibold': itemsPerPageSelected('50') }"
-            data-testid="sort-filter-form-items-per-page-50"
-            @click="sortFilterBlock.itemsPerPage = '50'"
-          >
-            <SfIconCheck :class="{ invisible: !itemsPerPageSelected('50') }" class="mr-1 w-[1.1rem]" />
-            50
-          </div>
-
-          <div
-            for="items-per-page-100"
-            class="flex items-center justify-center w-1/4 px-4 py-2 cursor-pointer text-sm"
-            :class="{ 'bg-gray-100 text-gray-900 font-semibold': itemsPerPageSelected('100') }"
-            data-testid="sort-filter-form-items-per-page-100"
-            @click="sortFilterBlock.itemsPerPage = '100'"
-          >
-            <SfIconCheck :class="{ invisible: !itemsPerPageSelected('100') }" class="mr-1 w-[1.1rem]" />
-            100
-          </div>
-        </div>
-      </div>
     </div>
   </UiAccordionItem>
 </template>
 
 <script setup lang="ts">
-import { SfInput, SfSwitch, SfIconCheck } from '@storefront-ui/vue';
-import type { SortFilterFormProps, SortFilterContent, SortFilterFieldKey, SortFilterFieldsVisibility } from './types';
-import dragIcon from 'assets/icons/paths/drag.svg';
+import { SfInput, SfSwitch } from '@storefront-ui/vue';
+import type { SortFilterFormProps, SortFilterContent, SortFilterFieldKey } from '~/components/blocks/SortFilter/types';
+import dragIcon from '~/assets/icons/paths/drag.svg';
 import draggable from 'vuedraggable/src/vuedraggable';
 
 const { data } = useCategoryTemplate();
@@ -165,10 +103,8 @@ const sortFilterBlock = computed<SortFilterContent>(() => {
 
   const content = rawContent as Partial<SortFilterContent>;
 
-  if (!content.enableFilters) content.enableFilters = false;
   if (!content.showAllFiltersImmediately) content.showAllFiltersImmediately = false;
   if (!content.numberOfFiltersToShowInitially) content.numberOfFiltersToShowInitially = 0;
-  if (!content.itemsPerPage) content.itemsPerPage = '10';
 
   return content as SortFilterContent;
 });
@@ -183,23 +119,6 @@ const fieldLabels: Record<string, string> = {
   availability: getEditorTranslation('availability'),
   customizedFilters: getEditorTranslation('customizedFilters'),
 };
-
-const itemsPerPageSelected = (value: '10' | '20' | '50' | '100') => {
-  return (sortFilterBlock.value.itemsPerPage || '10') === value;
-};
-
-const setFieldsValue = (newValue: boolean) => {
-  Object.keys(sortFilterBlock.value.fields as SortFilterFieldsVisibility).forEach((key) => {
-    sortFilterBlock.value.fields[key as SortFilterFieldKey] = newValue;
-  });
-};
-
-watch(
-  () => sortFilterBlock.value.enableFilters,
-  (newValue) => {
-    setFieldsValue(newValue);
-  },
-);
 </script>
 
 <i18n lang="json">
